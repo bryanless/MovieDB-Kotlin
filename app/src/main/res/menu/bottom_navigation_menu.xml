@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_now_playing"
+        android:icon="@drawable/ic_baseline_movie_24"
+        android:title="@string/title_now_playing" />
+</menu>

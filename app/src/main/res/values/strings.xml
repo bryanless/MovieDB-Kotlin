@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MovieDB-2</string>
+    <string name="title_now_playing">Now Playing</string>
+</resources>
