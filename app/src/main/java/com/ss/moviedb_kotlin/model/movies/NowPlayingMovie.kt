@@ -10,19 +10,20 @@ import com.ss.moviedb_kotlin.util.DataConverter
 @Entity(tableName = Const.NOW_PLAYING_MOVIES_TABLE)
 @TypeConverters(DataConverter::class)
 data class NowPlayingMovie(
-    val adult: Boolean?,
+    @PrimaryKey(autoGenerate = true)
+    var remoteId: Long = 0,
+    @Json(name = "adult") val adult: Boolean?,
     @Json(name = "backdrop_path") val backdropPath: String?,
     @Json(name = "genre_ids") val genreIds: List<Int>?,
-    @PrimaryKey
-    val id: Int?,
+    @Json(name = "id") var id: Int,
     @Json(name = "original_language") val originalLanguage: String?,
     @Json(name = "original_title") val originalTitle: String?,
-    val overview: String?,
-    val popularity: Double?,
+    @Json(name = "overview") val overview: String?,
+    @Json(name = "popularity") val popularity: Double?,
     @Json(name = "poster_path") val posterPath: String?,
     @Json(name = "release_date") val releaseDate: String?,
-    val title: String?,
-    val video: Boolean?,
+    @Json(name = "title") val title: String?,
+    @Json(name = "video") val video: Boolean?,
     @Json(name = "vote_average") val voteAverage: Double?,
     @Json(name = "vote_count") val voteCount: Int?
 )

@@ -12,7 +12,7 @@ interface MovieDatabaseDao {
     @Insert(onConflict = REPLACE)
     suspend fun insertNowPlayingMovies(nowPlayingMovieList: List<NowPlayingMovie>)
 
-    @Query("SELECT * FROM now_playing_movies")
+    @Query("SELECT * FROM now_playing_movies ORDER BY remoteId ASC")
     fun getNowPlayingMovies(): PagingSource<Int, NowPlayingMovie>
 
     @Query("DELETE FROM now_playing_movies")

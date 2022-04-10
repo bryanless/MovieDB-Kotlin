@@ -1,4 +1,4 @@
-package com.ss.moviedb_kotlin.ui
+package com.ss.moviedb_kotlin.ui.now_playing
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

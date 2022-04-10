@@ -7,7 +7,7 @@ class Const {
         const val BASE_URL = "https://api.themoviedb.org/3/"
 
         const val MOVIEDB_STARTING_PAGE_INDEX = 1;
-        const val MOVIEDB_PAGE_SIZE = 27;
+        const val MOVIEDB_PAGE_SIZE = 30;
 
         // List of image https://www.themoviedb.org/talk/5ff32c1467203d003fcb7a21
         const val IMG_URL_185 = "https://image.tmdb.org/t/p/w185/"

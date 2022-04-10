@@ -6,8 +6,8 @@ import com.ss.moviedb_kotlin.util.Const
 
 @Entity(tableName = Const.NOW_PLAYING_REMOTE_KEYS_TABLE)
 data class NowPlayingRemoteKeys(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = false)
     val id: Long,
-    val prevPage: Int?,
-    val nextPage: Int?,
+    val prevKey: Int?,
+    val nextKey: Int?,
 )

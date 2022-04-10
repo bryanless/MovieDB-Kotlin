@@ -3,13 +3,14 @@ package com.ss.moviedb_kotlin.data.paging
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.ss.moviedb_kotlin.model.movies.NowPlayingMovie
+import com.ss.moviedb_kotlin.network.MovieDbApi
 import com.ss.moviedb_kotlin.network.MovieDbApiEndPoint
 import com.ss.moviedb_kotlin.util.Const
 import retrofit2.HttpException
 import java.io.IOException
 
 class NowPlayingPagingSource(
-    private val movieDbApiEndPoint: MovieDbApiEndPoint
+    private val movieDbApi: MovieDbApi
 ) : PagingSource<Int, NowPlayingMovie>() {
     // The refresh key is used for subsequent refresh calls to PagingSource.load after the initial load
     override fun getRefreshKey(state: PagingState<Int, NowPlayingMovie>): Int? {
@@ -23,12 +24,12 @@ class NowPlayingPagingSource(
         val position = params.key ?: Const.MOVIEDB_STARTING_PAGE_INDEX
 
         return try {
-            val response = movieDbApiEndPoint.getNowPlaying(position, Const.API_KEY)
+            val response = movieDbApi.retrofitService.getNowPlaying(position, Const.API_KEY)
             val nowPlayingMovies = response.results
             val nextKey = if (nowPlayingMovies.isEmpty()) {
                 null
             } else {
-                position + 1
+                position + (params.loadSize / Const.MOVIEDB_PAGE_SIZE)
             }
 
             LoadResult.Page(
