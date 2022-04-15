@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">MovieDB-Kotlin</string>
+    <string name="appbar_scrolling_view_behavior">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
     <string name="title_now_playing">Now Playing</string>
+    <string name="title_home">Home</string>
+    <string name="title_upcoming">Upcoming</string>
 </resources>

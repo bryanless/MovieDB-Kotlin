@@ -4,7 +4,6 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.ss.moviedb_kotlin.data.paging.NowPlayingPagingSource
 import com.ss.moviedb_kotlin.data.paging.NowPlayingRemoteMediator
 import com.ss.moviedb_kotlin.db.remote.MovieDatabase
 import com.ss.moviedb_kotlin.model.movies.NowPlayingMovie

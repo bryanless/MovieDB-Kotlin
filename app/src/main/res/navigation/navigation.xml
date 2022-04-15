@@ -3,11 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/nowPlayingFragment">
+    app:startDestination="@id/home_fragment">
 
     <fragment
-        android:id="@+id/nowPlayingFragment"
+        android:id="@+id/now_playing_fragment"
         android:name="com.ss.moviedb_kotlin.ui.now_playing.NowPlayingFragment"
-        android:label="now_playing_fragment"
+        android:label="@string/title_now_playing"
         tools:layout="@layout/now_playing_fragment" />
+    <fragment
+        android:id="@+id/home_fragment"
+        android:name="com.ss.moviedb_kotlin.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/home_fragment" />
 </navigation>
