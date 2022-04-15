@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.now_playing.NowPlayingFragment">
+    tools:context=".ui.upcoming.UpcomingFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_now_playing"
+        android:id="@+id/recycler_view_upcoming"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"

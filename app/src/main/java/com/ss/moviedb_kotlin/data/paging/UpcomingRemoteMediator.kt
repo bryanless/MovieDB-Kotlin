@@ -5,22 +5,22 @@ import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
-import com.ss.moviedb_kotlin.db.local.NowPlayingRemoteKeys
+import com.ss.moviedb_kotlin.db.local.UpcomingRemoteKeys
 import com.ss.moviedb_kotlin.db.remote.MovieDatabase
-import com.ss.moviedb_kotlin.model.movies.NowPlayingMovie
+import com.ss.moviedb_kotlin.model.movies.UpcomingMovie
 import com.ss.moviedb_kotlin.network.MovieDbApi
 import com.ss.moviedb_kotlin.util.Const
 import retrofit2.HttpException
 import java.io.IOException
 
 @ExperimentalPagingApi
-class NowPlayingRemoteMediator(
+class UpcomingRemoteMediator(
     private val movieDbApi: MovieDbApi,
     private val movieDatabase: MovieDatabase
-) : RemoteMediator<Int, NowPlayingMovie>() {
+) : RemoteMediator<Int, UpcomingMovie>() {
     override suspend fun load(
         loadType: LoadType,
-        state: PagingState<Int, NowPlayingMovie>
+        state: PagingState<Int, UpcomingMovie>
     ): MediatorResult {
         val page = when (loadType) {
             LoadType.REFRESH -> {
@@ -48,23 +48,23 @@ class NowPlayingRemoteMediator(
         }
 
         try {
-            val apiResponse = movieDbApi.retrofitService.getNowPlaying(page, Const.API_KEY)
+            val apiResponse = movieDbApi.retrofitService.getUpcoming(page, Const.API_KEY)
 
             val movies = apiResponse.results
             val endOfPaginationReached = movies.isEmpty()
             movieDatabase.withTransaction {
                 // clear all tables in the database
                 if (loadType == LoadType.REFRESH) {
-                    movieDatabase.nowPlayingRemoteKeysDao().clearNowPlayingRemoteKeys()
-                    movieDatabase.movieDatabaseDao().clearNowPlayingMovies()
+                    movieDatabase.upcomingRemoteKeysDao().clearUpcomingRemoteKeys()
+                    movieDatabase.movieDatabaseDao().clearUpcomingMovies()
                 }
                 val prevKey = if (page == Const.MOVIEDB_STARTING_PAGE_INDEX) null else page - 1
                 val nextKey = if (endOfPaginationReached) null else page + 1
                 val keys = movies.map {
-                    NowPlayingRemoteKeys(id = it.id.toLong(), prevKey = prevKey, nextKey = nextKey)
+                    UpcomingRemoteKeys(id = it.id.toLong(), prevKey = prevKey, nextKey = nextKey)
                 }
-                movieDatabase.nowPlayingRemoteKeysDao().insertNowPlayingRemoteKeys(keys)
-                movieDatabase.movieDatabaseDao().insertNowPlayingMovies(movies)
+                movieDatabase.upcomingRemoteKeysDao().insertUpcomingRemoteKeys(keys)
+                movieDatabase.movieDatabaseDao().insertUpcomingMovies(movies)
             }
             return MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
         } catch (exception: IOException) {
@@ -74,34 +74,34 @@ class NowPlayingRemoteMediator(
         }
     }
 
-    private suspend fun getRemoteKeyForLastItem(state: PagingState<Int, NowPlayingMovie>): NowPlayingRemoteKeys? {
+    private suspend fun getRemoteKeyForLastItem(state: PagingState<Int, UpcomingMovie>): UpcomingRemoteKeys? {
         // Get the last page that was retrieved, that contained items.
         // From that last page, get the last item
         return state.pages.lastOrNull { it.data.isNotEmpty() }?.data?.lastOrNull()
             ?.let { movie ->
                 // Get the remote keys of the last item retrieved
-                movieDatabase.nowPlayingRemoteKeysDao().getNowPlayingRemoteKey(movie.id.toLong())
+                movieDatabase.upcomingRemoteKeysDao().getUpcomingRemoteKey(movie.id.toLong())
             }
     }
 
-    private suspend fun getRemoteKeyForFirstItem(state: PagingState<Int, NowPlayingMovie>): NowPlayingRemoteKeys? {
+    private suspend fun getRemoteKeyForFirstItem(state: PagingState<Int, UpcomingMovie>): UpcomingRemoteKeys? {
         // Get the first page that was retrieved, that contained items.
         // From that first page, get the first item
         return state.pages.firstOrNull { it.data.isNotEmpty() }?.data?.firstOrNull()
             ?.let { movie ->
                 // Get the remote keys of the first items retrieved
-                movieDatabase.nowPlayingRemoteKeysDao().getNowPlayingRemoteKey(movie.id.toLong())
+                movieDatabase.upcomingRemoteKeysDao().getUpcomingRemoteKey(movie.id.toLong())
             }
     }
 
     private suspend fun getRemoteKeyClosestToCurrentPosition(
-        state: PagingState<Int, NowPlayingMovie>
-    ): NowPlayingRemoteKeys? {
+        state: PagingState<Int, UpcomingMovie>
+    ): UpcomingRemoteKeys? {
         // The paging library is trying to load data after the anchor position
         // Get the item closest to the anchor position
         return state.anchorPosition?.let { position ->
             state.closestItemToPosition(position)?.id?.let { movieId ->
-                movieDatabase.nowPlayingRemoteKeysDao().getNowPlayingRemoteKey(movieId.toLong())
+                movieDatabase.upcomingRemoteKeysDao().getUpcomingRemoteKey(movieId.toLong())
             }
         }
     }

@@ -1,9 +1,10 @@
-package com.ss.moviedb_kotlin.ui.now_playing
+package com.ss.moviedb_kotlin.ui.upcoming
 
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.paging.DifferCallback
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -13,40 +14,37 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.ss.moviedb_kotlin.databinding.ItemMoviePosterBinding
-import com.ss.moviedb_kotlin.model.movies.NowPlayingMovie
-import com.ss.moviedb_kotlin.ui.now_playing.NowPlayingAdapter.NowPlayingViewHolder
+import com.ss.moviedb_kotlin.model.movies.UpcomingMovie
+import com.ss.moviedb_kotlin.ui.upcoming.UpcomingAdapter.UpcomingViewHolder
 import com.ss.moviedb_kotlin.util.Const
 
-class NowPlayingAdapter :
-    PagingDataAdapter<NowPlayingMovie, NowPlayingViewHolder>(DifferCallback) {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NowPlayingViewHolder {
-        return NowPlayingViewHolder(ItemMoviePosterBinding.inflate(LayoutInflater.from(parent.context)))
+class UpcomingAdapter : PagingDataAdapter<UpcomingMovie, UpcomingViewHolder>(DiffCallback) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UpcomingViewHolder {
+        return UpcomingViewHolder(ItemMoviePosterBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
-    override fun onBindViewHolder(holder: NowPlayingViewHolder, position: Int) {
-        val movie: NowPlayingMovie? = getItem(position)
+    override fun onBindViewHolder(holder: UpcomingViewHolder, position: Int) {
+        val movie: UpcomingMovie? = getItem(position)
 
         if (movie != null) {
             holder.bind(movie)
         }
     }
 
-    companion object DifferCallback : DiffUtil.ItemCallback<NowPlayingMovie>() {
-        override fun areItemsTheSame(oldItem: NowPlayingMovie, newItem: NowPlayingMovie): Boolean {
+    companion object DiffCallback : DiffUtil.ItemCallback<UpcomingMovie>() {
+        override fun areItemsTheSame(oldItem: UpcomingMovie, newItem: UpcomingMovie): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(
-            oldItem: NowPlayingMovie,
-            newItem: NowPlayingMovie
-        ): Boolean {
+        override fun areContentsTheSame(oldItem: UpcomingMovie, newItem: UpcomingMovie): Boolean {
             return oldItem == newItem
         }
+
     }
 
-    class NowPlayingViewHolder(private var binding: ItemMoviePosterBinding) :
+    class UpcomingViewHolder(private var binding: ItemMoviePosterBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(movie: NowPlayingMovie) {
+        fun bind(movie: UpcomingMovie) {
             // * Title placeholder
             binding.textTitle.text = movie.title
             binding.textTitle.visibility = View.VISIBLE

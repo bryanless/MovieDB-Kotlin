@@ -6,9 +6,11 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
 import com.ss.moviedb_kotlin.model.movies.NowPlayingMovie
+import com.ss.moviedb_kotlin.model.movies.UpcomingMovie
 
 @Dao
 interface MovieDatabaseDao {
+    //==Start of Now Playing
     @Insert(onConflict = REPLACE)
     suspend fun insertNowPlayingMovies(nowPlayingMovieList: List<NowPlayingMovie>)
 
@@ -17,4 +19,16 @@ interface MovieDatabaseDao {
 
     @Query("DELETE FROM now_playing_movies")
     suspend fun clearNowPlayingMovies()
+    //==End of Now Playing
+
+    //==Start of Upcoming
+    @Insert(onConflict = REPLACE)
+    suspend fun insertUpcomingMovies(nowPlayingMovieList: List<UpcomingMovie>)
+
+    @Query("SELECT * FROM upcoming_movies ORDER BY remoteId ASC")
+    fun getUpcomingMovies(): PagingSource<Int, UpcomingMovie>
+
+    @Query("DELETE FROM upcoming_movies")
+    suspend fun clearUpcomingMovies()
+    //==End of Upcoming
 }

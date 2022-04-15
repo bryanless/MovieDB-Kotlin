@@ -21,5 +21,6 @@ class Const {
         const val MOVIEDB_DATABASE = "moviedb"
         const val NOW_PLAYING_MOVIES_TABLE = "now_playing_movies"
         const val NOW_PLAYING_REMOTE_KEYS_TABLE = "now_playing_remote_keys"
-    }
+        const val UPCOMING_MOVIES_TABLE = "upcoming_movies"
+        const val UPCOMING_REMOTE_KEYS_TABLE = "upcoming_remote_keys"}
 }

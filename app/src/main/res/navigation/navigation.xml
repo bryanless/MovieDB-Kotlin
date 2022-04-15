@@ -15,4 +15,9 @@
         android:name="com.ss.moviedb_kotlin.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/home_fragment" />
+    <fragment
+        android:id="@+id/upcoming_fragment"
+        android:name="com.ss.moviedb_kotlin.ui.upcoming.UpcomingFragment"
+        android:label="@string/title_upcoming"
+        tools:layout="@layout/upcoming_fragment" />
 </navigation>

@@ -1,4 +1,4 @@
-package com.ss.moviedb_kotlin.ui.now_playing
+package com.ss.moviedb_kotlin.ui.upcoming
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,32 +10,32 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
-import com.ss.moviedb_kotlin.data.repository.NowPlayingRepository
-import com.ss.moviedb_kotlin.databinding.NowPlayingFragmentBinding
+import com.ss.moviedb_kotlin.data.repository.UpcomingRepository
+import com.ss.moviedb_kotlin.databinding.UpcomingFragmentBinding
 import com.ss.moviedb_kotlin.db.remote.MovieDatabase
 import com.ss.moviedb_kotlin.network.MovieDbApi
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class NowPlayingFragment : Fragment() {
-    private var _binding: NowPlayingFragmentBinding? = null
+class UpcomingFragment : Fragment() {
+    private var _binding: UpcomingFragmentBinding? = null;
     private val binding get() = _binding!!
-    private val viewModel: NowPlayingViewModel by lazy {
+    private val viewModel: UpcomingViewModel by lazy {
         ViewModelProvider(
-            requireActivity(), NowPlayingViewModelFactory(
-                NowPlayingRepository(
+            requireActivity(), UpcomingViewModelFactory(
+                UpcomingRepository(
                     MovieDbApi,
                     MovieDatabase.getInstance(requireContext())
                 )
             )
-        ).get(NowPlayingViewModel::class.java)
+        ).get(UpcomingViewModel::class.java)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = NowPlayingFragmentBinding.inflate(inflater, container, false)
+        _binding = UpcomingFragmentBinding.inflate(inflater, container, false)
 
         return binding.root
     }
@@ -48,9 +48,9 @@ class NowPlayingFragment : Fragment() {
     }
 
     private fun initView() {
-        val pagingAdapter = NowPlayingAdapter()
+        val pagingAdapter = UpcomingAdapter()
         // * Recycler view
-        binding.recyclerViewNowPlaying.apply {
+        binding.recyclerViewUpcoming.apply {
             layoutManager = GridLayoutManager(requireContext(), 3)
             adapter = pagingAdapter
         }
@@ -69,8 +69,8 @@ class NowPlayingFragment : Fragment() {
         // TODO Navigate to detail fragment
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
+    override fun onDestroy() {
+        super.onDestroy()
         _binding = null
     }
 }
