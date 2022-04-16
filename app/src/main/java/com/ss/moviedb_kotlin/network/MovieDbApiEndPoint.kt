@@ -39,11 +39,11 @@ interface MovieDbApiEndPoint {
         @Query("api_key") apiKey: String
     ): TopRatedResponse
 
-//    @GET("movie/{movie_id}/videos")
-//    fun getVideo(
-//        @Path("movie_id") movieId: String?,
-//        @Query("api_key") apiKey: String?
-//    ): Call<Videos?>?
+    @GET("movie/{movie_id}/videos")
+    suspend fun getVideo(
+        @Path("movie_id") movieId: Int,
+        @Query("api_key") apiKey: String
+    ): VideoResponse
     //==End of movie API
 
     //==End of genre API

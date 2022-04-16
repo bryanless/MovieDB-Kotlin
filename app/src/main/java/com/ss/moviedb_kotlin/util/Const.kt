@@ -15,6 +15,7 @@ class Const {
         const val IMG_URL_780 = "https://image.tmdb.org/t/p/w780/"
 
         // * YouTube
+        const val YOUTUBE = "YouTube"
         const val YOUTUBE_WATCH_URL = "https://www.youtube.com/watch?v="
 
         // * Room Database

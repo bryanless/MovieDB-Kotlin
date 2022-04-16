@@ -9,7 +9,7 @@ data class DetailMovie(
     @Json(name = "budget") val budget: Int?,
     @Json(name = "genres") val genres: List<GenreMovie>?,
     @Json(name = "homepage") val homepage: String?,
-    @Json(name = "id") val id: Int,
+    @Json(name = "id") val id: Int?,
     @Json(name = "imdb_id") val imdbId: String?,
     @Json(name = "original_language") val originalLanguage: String?,
     @Json(name = "original_title") val originalTitle: String?,

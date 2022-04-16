@@ -5,9 +5,10 @@
     <string name="title_home">Home</string>
     <string name="title_upcoming">Upcoming</string>
     <string name="title_placeholder">Placeholder</string>
-    <string name="title_trending">Trending Movies</string>
+    <string name="title_trending">Trending Movies of The Week</string>
     <string name="title_popular">Popular Movies</string>
     <string name="title_top_rated">Top Rated Movies</string>
+    <string name="text_null">-</string>
     <string name="text_movie_title">Title</string>
     <string name="text_production_company">Production Company</string>
     <string name="text_synopsis">Synopsis</string>
@@ -16,4 +17,6 @@
     <string name="text_movie_rating">%1$s (%2$s)</string>
     <string name="text_movie_description">%1$s\n\n%2$s</string>
     <string name="title_movie_detail">Movie Detail</string>
+    <string name="text_video_failed">Trailer is not available</string>
+    <string name="text_dismiss">Dismiss</string>
 </resources>

@@ -1,13 +1,17 @@
 package com.ss.moviedb_kotlin.ui.detail
 
+import android.content.Intent
+import android.content.pm.ResolveInfo
 import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.os.Bundle
+import android.text.TextUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
@@ -16,6 +20,7 @@ import com.bumptech.glide.request.target.Target
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.ss.moviedb_kotlin.R
 import com.ss.moviedb_kotlin.data.repository.DetailRepository
 import com.ss.moviedb_kotlin.databinding.DetailFragmentBinding
@@ -31,7 +36,9 @@ class DetailFragment : Fragment() {
         )
     }
 
-    private var movieId: Int = 0
+    private var movieId: Int = -1
+    private var videoSite: String = ""
+    private var videoKey: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,6 +52,44 @@ class DetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initView()
+        setListener()
+    }
+
+    private fun setListener() {
+        binding.buttonMovieWatchTrailerDetail.setOnClickListener {
+            // ? YouTube
+            if (TextUtils.equals(videoSite, Const.YOUTUBE)) {
+                // * Set intent to launch YouTube
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(Const.YOUTUBE_WATCH_URL + videoKey))
+
+                // * Check if YouTube installed
+                val manager = requireActivity().packageManager
+                val info = manager.queryIntentActivities(intent, 0) as ArrayList<ResolveInfo>
+                if (info.size > 0) {
+                    // * YouTube installed
+                    intent.setPackage("com.google.android.youtube")
+                } else {
+                    // * Youtube not installed
+                }
+
+                // * Launch YouTube
+                startActivity(intent)
+            } else {
+                // * Make snackbar
+                val snackbar = Snackbar.make(
+                    requireView(),
+                    getString(R.string.text_video_failed),
+                    Snackbar.LENGTH_SHORT
+                )
+                snackbar.anchorView = requireActivity().findViewById(R.id.bottom_navigation_view)
+
+                // * Set action
+                snackbar.setAction(
+                    getString(R.string.text_dismiss)
+                ) { snackbar.dismiss() }
+                snackbar.show()
+            }
+        }
     }
 
     private fun initView() {
@@ -113,6 +158,29 @@ class DetailFragment : Fragment() {
                 layoutManager =
                     FlexboxLayoutManager(requireContext(), FlexDirection.ROW, FlexWrap.WRAP)
                 adapter = detailGenreAdapter
+            }
+        }
+
+        viewModel.getVideosMovie(movieId)
+        viewModel.videos.observe(viewLifecycleOwner) { videos ->
+            if (videos.isNotEmpty()) {
+                val officialVideo = videos.firstOrNull { video -> video.official == true }
+                val youtubeVideo = videos.firstOrNull { video -> video.key == Const.YOUTUBE }
+
+                when {
+                    officialVideo != null -> {
+                        videoSite = officialVideo.site.toString()
+                        videoKey = officialVideo.key.toString()
+                    }
+                    youtubeVideo != null -> {
+                        videoSite = youtubeVideo.site.toString()
+                        videoKey = youtubeVideo.key.toString()
+                    }
+                    else -> {
+                        videoSite = videos.first().site.toString()
+                        videoKey = videos.first().key.toString()
+                    }
+                }
             }
         }
     }
