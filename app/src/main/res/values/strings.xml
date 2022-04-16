@@ -8,5 +8,12 @@
     <string name="title_trending">Trending Movies</string>
     <string name="title_popular">Popular Movies</string>
     <string name="title_top_rated">Top Rated Movies</string>
-    <string name="title_movie_title">Title</string>
+    <string name="text_movie_title">Title</string>
+    <string name="text_production_company">Production Company</string>
+    <string name="text_synopsis">Synopsis</string>
+    <string name="text_watch_trailer">Watch Trailer</string>
+    <string name="text_movie_caption">%1$s \u2022 %2$sh %3$sm</string>
+    <string name="text_movie_rating">%1$s (%2$s)</string>
+    <string name="text_movie_description">%1$s\n\n%2$s</string>
+    <string name="title_movie_detail">Movie Detail</string>
 </resources>

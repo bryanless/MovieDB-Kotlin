@@ -2,12 +2,14 @@ package com.ss.moviedb_kotlin.ui.trending
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.ss.moviedb_kotlin.databinding.ItemMovieBackdropBinding
 import com.ss.moviedb_kotlin.model.movies.TrendingMovie
+import com.ss.moviedb_kotlin.ui.home.HomeFragmentDirections
 import com.ss.moviedb_kotlin.ui.trending.TrendingAdapter.TrendingViewHolder
 import com.ss.moviedb_kotlin.util.Const
 
@@ -28,6 +30,15 @@ class TrendingAdapter : PagingDataAdapter<TrendingMovie, TrendingViewHolder>(Dif
         if (movie != null) {
             holder.bind(movie)
         }
+
+        holder.itemView.setOnClickListener {
+            val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(movie!!.id)
+            it.findNavController().navigate(action)
+        }
+    }
+
+    override fun getItemCount(): Int {
+        return if (super.getItemCount() < 10) super.getItemCount() else 10
     }
 
     companion object DifferCallback : DiffUtil.ItemCallback<TrendingMovie>() {
@@ -43,16 +54,16 @@ class TrendingAdapter : PagingDataAdapter<TrendingMovie, TrendingViewHolder>(Dif
         }
     }
 
-    class TrendingViewHolder(private var binding: ItemMovieBackdropBinding) :
+    class TrendingViewHolder(private val binding: ItemMovieBackdropBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(movie: TrendingMovie) {
             // * Title placeholder
-            binding.textMovieBackdropTitle.text = movie.title
+            binding.textMovieBackdropTitleItem.text = movie.title
 
             if (!movie.posterPath.isNullOrBlank()) {
-                Glide.with(binding.imageMovieBackdrop)
+                Glide.with(binding.imageMovieBackdropItem)
                     .load(Const.IMG_URL_780 + movie.backdropPath)
-                    .into(binding.imageMovieBackdrop)
+                    .into(binding.imageMovieBackdropItem)
             }
         }
     }

@@ -9,15 +9,36 @@
         android:id="@+id/now_playing_fragment"
         android:name="com.ss.moviedb_kotlin.ui.now_playing.NowPlayingFragment"
         android:label="@string/title_now_playing"
-        tools:layout="@layout/now_playing_fragment" />
+        tools:layout="@layout/now_playing_fragment" >
+        <action
+            android:id="@+id/action_now_playing_fragment_to_detailFragment"
+            app:destination="@id/detail_fragment" />
+    </fragment>
     <fragment
         android:id="@+id/home_fragment"
         android:name="com.ss.moviedb_kotlin.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/home_fragment" />
+        tools:layout="@layout/home_fragment" >
+        <action
+            android:id="@+id/action_home_fragment_to_detailFragment"
+            app:destination="@id/detail_fragment" />
+    </fragment>
     <fragment
         android:id="@+id/upcoming_fragment"
         android:name="com.ss.moviedb_kotlin.ui.upcoming.UpcomingFragment"
         android:label="@string/title_upcoming"
-        tools:layout="@layout/upcoming_fragment" />
+        tools:layout="@layout/upcoming_fragment" >
+        <action
+            android:id="@+id/action_upcoming_fragment_to_detailFragment"
+            app:destination="@id/detail_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detail_fragment"
+        android:name="com.ss.moviedb_kotlin.ui.detail.DetailFragment"
+        android:label="@string/title_movie_detail"
+        tools:layout="@layout/detail_fragment" >
+        <argument
+            android:name="movieId"
+            app:argType="integer" />
+    </fragment>
 </navigation>

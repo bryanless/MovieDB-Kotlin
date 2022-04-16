@@ -1,5 +1,6 @@
 package com.ss.moviedb_kotlin.network
 
+import com.ss.moviedb_kotlin.model.movies.DetailMovie
 import com.ss.moviedb_kotlin.network.response.*
 import retrofit2.Call
 import retrofit2.http.GET
@@ -8,11 +9,11 @@ import retrofit2.http.Query
 
 interface MovieDbApiEndPoint {
     //==Start of movie API
-//    @GET("movie/{movie_id}")
-//    suspend fun getMovieById(
-//        @Path("movie_id") movieId: String,
-//        @Query("api_key") apiKey: String
-//    ): MovieDetail
+    @GET("movie/{movie_id}")
+    suspend fun getMovieById(
+        @Path("movie_id") movieId: Int,
+        @Query("api_key") apiKey: String
+    ): DetailMovie
 
     @GET("movie/now_playing")
     suspend fun getNowPlaying(

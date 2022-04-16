@@ -4,7 +4,7 @@ import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.paging.DifferCallback
+import androidx.navigation.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -35,6 +35,11 @@ class UpcomingAdapter : PagingDataAdapter<UpcomingMovie, UpcomingViewHolder>(Dif
         if (movie != null) {
             holder.bind(movie)
         }
+
+        holder.itemView.setOnClickListener {
+            val action = UpcomingFragmentDirections.actionUpcomingFragmentToDetailFragment(movie!!.id)
+            it.findNavController().navigate(action)
+        }
     }
 
     companion object DiffCallback : DiffUtil.ItemCallback<UpcomingMovie>() {
@@ -48,15 +53,15 @@ class UpcomingAdapter : PagingDataAdapter<UpcomingMovie, UpcomingViewHolder>(Dif
 
     }
 
-    class UpcomingViewHolder(private var binding: ItemMoviePosterBinding) :
+    class UpcomingViewHolder(private val binding: ItemMoviePosterBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(movie: UpcomingMovie) {
             // * Title placeholder
-            binding.textMoviePosterTitle.text = movie.title
-            binding.textMoviePosterTitle.visibility = View.VISIBLE
+            binding.textMoviePosterTitleItem.text = movie.title
+            binding.textMoviePosterTitleItem.visibility = View.VISIBLE
 
             if (!movie.posterPath.isNullOrBlank()) {
-                Glide.with(binding.imageMoviePoster)
+                Glide.with(binding.imageMoviePosterItem)
                     .load(Const.IMG_URL_500 + movie.posterPath)
                     .listener(object : RequestListener<Drawable> {
                         override fun onLoadFailed(
@@ -76,12 +81,14 @@ class UpcomingAdapter : PagingDataAdapter<UpcomingMovie, UpcomingViewHolder>(Dif
                             isFirstResource: Boolean
                         ): Boolean {
                             // * Hide title placeholder when image is loaded
-                            binding.textMoviePosterTitle.visibility = View.INVISIBLE
+                            binding.textMoviePosterTitleItem.visibility = View.INVISIBLE
                             return false
                         }
                     })
-                    .into(binding.imageMoviePoster)
+                    .into(binding.imageMoviePosterItem)
             }
+
+
         }
     }
 }
