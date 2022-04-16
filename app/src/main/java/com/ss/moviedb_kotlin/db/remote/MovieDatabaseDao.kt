@@ -7,6 +7,7 @@ import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
 import com.ss.moviedb_kotlin.model.movies.NowPlayingMovie
 import com.ss.moviedb_kotlin.model.movies.PopularMovie
+import com.ss.moviedb_kotlin.model.movies.TopRatedMovie
 import com.ss.moviedb_kotlin.model.movies.UpcomingMovie
 
 @Dao
@@ -21,6 +22,17 @@ interface MovieDatabaseDao {
     @Query("DELETE FROM popular_movies")
     suspend fun clearPopularMovies()
     //==End of Popular
+
+    //==Start of Top Rated
+    @Insert(onConflict = REPLACE)
+    suspend fun insertTopRatedMovies(topRatedMovieList: List<TopRatedMovie>)
+
+    @Query("SELECT * FROM top_rated_movies ORDER BY remoteId ASC")
+    fun getTopRatedMovies(): PagingSource<Int, TopRatedMovie>
+
+    @Query("DELETE FROM top_rated_movies")
+    suspend fun clearTopRatedMovies()
+    //==End of Top Rated
 
     //==Start of Now Playing
     @Insert(onConflict = REPLACE)

@@ -7,21 +7,24 @@ import androidx.room.RoomDatabase
 import com.ss.moviedb_kotlin.db.local.*
 import com.ss.moviedb_kotlin.model.movies.NowPlayingMovie
 import com.ss.moviedb_kotlin.model.movies.PopularMovie
+import com.ss.moviedb_kotlin.model.movies.TopRatedMovie
 import com.ss.moviedb_kotlin.model.movies.UpcomingMovie
 import com.ss.moviedb_kotlin.util.Const
 
 @Database(
     entities = [
         PopularMovie::class, PopularRemoteKeys::class,
+        TopRatedMovie::class, TopRatedRemoteKeys::class,
         NowPlayingMovie::class, NowPlayingRemoteKeys::class,
         UpcomingMovie::class, UpcomingRemoteKeys::class],
-    version = 3,
+    version = 4,
     exportSchema = false
 )
 abstract class MovieDatabase : RoomDatabase() {
     // * DAO
     abstract fun movieDatabaseDao(): MovieDatabaseDao
     abstract fun popularRemoteKeysDao(): PopularRemoteKeysDao
+    abstract fun topRatedRemoteKeysDao(): TopRatedRemoteKeysDao
     abstract fun nowPlayingRemoteKeysDao(): NowPlayingRemoteKeysDao
     abstract fun upcomingRemoteKeysDao(): UpcomingRemoteKeysDao
 

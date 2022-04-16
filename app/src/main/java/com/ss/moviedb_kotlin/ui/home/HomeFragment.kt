@@ -12,12 +12,18 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ss.moviedb_kotlin.data.repository.PopularRepository
+import com.ss.moviedb_kotlin.data.repository.TopRatedRepository
 import com.ss.moviedb_kotlin.databinding.HomeFragmentBinding
 import com.ss.moviedb_kotlin.db.remote.MovieDatabase
 import com.ss.moviedb_kotlin.network.MovieDbApi
 import com.ss.moviedb_kotlin.ui.popular.PopularAdapter
 import com.ss.moviedb_kotlin.ui.popular.PopularViewModel
 import com.ss.moviedb_kotlin.ui.popular.PopularViewModelFactory
+import com.ss.moviedb_kotlin.ui.top_rated.TopRatedAdapter
+import com.ss.moviedb_kotlin.ui.top_rated.TopRatedViewModel
+import com.ss.moviedb_kotlin.ui.top_rated.TopRatedViewModelFactory
+import com.ss.moviedb_kotlin.ui.trending.TrendingViewModel
+import com.ss.moviedb_kotlin.ui.trending.TrendingViewModelFactory
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -27,6 +33,14 @@ class HomeFragment : Fragment() {
     private val popularViewModel: PopularViewModel by activityViewModels {
         PopularViewModelFactory(
             PopularRepository(
+                MovieDbApi,
+                MovieDatabase.getInstance(requireContext())
+            )
+        )
+    }
+    private val topRatedViewModel: TopRatedViewModel by activityViewModels {
+        TopRatedViewModelFactory(
+            TopRatedRepository(
                 MovieDbApi,
                 MovieDatabase.getInstance(requireContext())
             )
@@ -50,10 +64,15 @@ class HomeFragment : Fragment() {
 
     private fun initView() {
         val popularPagingAdapter = PopularAdapter()
+        val topRatedPagingAdapter = TopRatedAdapter()
         // * Recycler view
         binding.recyclerViewPopular.apply {
             layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
             adapter = popularPagingAdapter
+        }
+        binding.recyclerViewTopRated.apply {
+            layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
+            adapter = topRatedPagingAdapter
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
@@ -61,6 +80,15 @@ class HomeFragment : Fragment() {
                 popularViewModel.pagingDataFlow
                     .collectLatest { pagingData ->
                         popularPagingAdapter.submitData(pagingData)
+                    }
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                topRatedViewModel.pagingDataFlow
+                    .collectLatest { pagingData ->
+                        topRatedPagingAdapter.submitData(pagingData)
                     }
             }
         }

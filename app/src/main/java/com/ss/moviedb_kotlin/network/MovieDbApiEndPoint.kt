@@ -2,6 +2,7 @@ package com.ss.moviedb_kotlin.network
 
 import com.ss.moviedb_kotlin.network.response.NowPlayingResponse
 import com.ss.moviedb_kotlin.network.response.PopularResponse
+import com.ss.moviedb_kotlin.network.response.TopRatedResponse
 import com.ss.moviedb_kotlin.network.response.UpcomingResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -31,12 +32,13 @@ interface MovieDbApiEndPoint {
         @Query("page") page: Int,
         @Query("api_key") apiKey: String?
     ): PopularResponse
-//
-//    @GET("movie/top_rated")
-//    fun getTopRated(
-//        @Query("api_key") apiKey: String?
-//    ): Call<TopRated?>?
-//
+
+    @GET("movie/top_rated")
+    suspend fun getTopRated(
+        @Query("page") page: Int,
+        @Query("api_key") apiKey: String?
+    ): TopRatedResponse
+
 //    @GET("movie/{movie_id}/videos")
 //    fun getVideo(
 //        @Path("movie_id") movieId: String?,

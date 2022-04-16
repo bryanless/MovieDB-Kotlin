@@ -48,11 +48,11 @@ class NowPlayingAdapter :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(movie: NowPlayingMovie) {
             // * Title placeholder
-            binding.textTitle.text = movie.title
-            binding.textTitle.visibility = View.VISIBLE
+            binding.textMoviePosterTitle.text = movie.title
+            binding.textMoviePosterTitle.visibility = View.VISIBLE
 
             if (!movie.posterPath.isNullOrBlank()) {
-                Glide.with(binding.imagePoster)
+                Glide.with(binding.imageMoviePoster)
                     .load(Const.IMG_URL_500 + movie.posterPath)
                     .listener(object : RequestListener<Drawable> {
                         override fun onLoadFailed(
@@ -72,11 +72,11 @@ class NowPlayingAdapter :
                             isFirstResource: Boolean
                         ): Boolean {
                             // * Hide title placeholder when image is loaded
-                            binding.textTitle.visibility = View.INVISIBLE
+                            binding.textMoviePosterTitle.visibility = View.INVISIBLE
                             return false
                         }
                     })
-                    .into(binding.imagePoster)
+                    .into(binding.imageMoviePoster)
             }
         }
     }
