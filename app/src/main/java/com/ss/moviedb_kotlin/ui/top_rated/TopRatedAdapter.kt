@@ -17,9 +17,16 @@ import com.ss.moviedb_kotlin.databinding.ItemMoviePosterBinding
 import com.ss.moviedb_kotlin.model.movies.TopRatedMovie
 import com.ss.moviedb_kotlin.util.Const
 
-class TopRatedAdapter : PagingDataAdapter<TopRatedMovie, TopRatedAdapter.TopRatedViewHolder>(DifferCallback) {
+class TopRatedAdapter :
+    PagingDataAdapter<TopRatedMovie, TopRatedAdapter.TopRatedViewHolder>(DifferCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopRatedViewHolder {
-        return TopRatedViewHolder(ItemMovieBackdropBinding.inflate(LayoutInflater.from(parent.context)))
+        return TopRatedViewHolder(
+            ItemMoviePosterBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: TopRatedViewHolder, position: Int) {
@@ -43,15 +50,15 @@ class TopRatedAdapter : PagingDataAdapter<TopRatedMovie, TopRatedAdapter.TopRate
         }
     }
 
-    class TopRatedViewHolder(private var binding: ItemMovieBackdropBinding) :
+    class TopRatedViewHolder(private var binding: ItemMoviePosterBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(movie: TopRatedMovie) {
             // * Title placeholder
-            binding.textMovieBackdropTitle.text = movie.title
-            binding.textMovieBackdropTitle.visibility = View.VISIBLE
+            binding.textMoviePosterTitle.text = movie.title
+            binding.textMoviePosterTitle.visibility = View.VISIBLE
 
             if (!movie.posterPath.isNullOrBlank()) {
-                Glide.with(binding.imageMovieBackdrop)
+                Glide.with(binding.imageMoviePoster)
                     .load(Const.IMG_URL_500 + movie.posterPath)
                     .listener(object : RequestListener<Drawable> {
                         override fun onLoadFailed(
@@ -71,11 +78,11 @@ class TopRatedAdapter : PagingDataAdapter<TopRatedMovie, TopRatedAdapter.TopRate
                             isFirstResource: Boolean
                         ): Boolean {
                             // * Hide title placeholder when image is loaded
-                            binding.textMovieBackdropTitle.visibility = View.INVISIBLE
+                            binding.textMoviePosterTitle.visibility = View.INVISIBLE
                             return false
                         }
                     })
-                    .into(binding.imageMovieBackdrop)
+                    .into(binding.imageMoviePoster)
             }
         }
     }

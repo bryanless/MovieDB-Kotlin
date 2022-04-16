@@ -19,6 +19,10 @@ class Const {
 
         // * Room Database
         const val MOVIEDB_DATABASE = "moviedb"
+        const val MEDIA_TYPE_MOVIE = "movie"
+        const val TIME_WINDOW_WEEK = "week"
+        const val TRENDING_MOVIES_TABLE = "trending_movies"
+        const val TRENDING_REMOTE_KEYS_TABLE = "trending_remote_keys"
         const val POPULAR_MOVIES_TABLE = "popular_movies"
         const val POPULAR_REMOTE_KEYS_TABLE = "popular_remote_keys"
         const val TOP_RATED_MOVIES_TABLE = "top_rated_movies"

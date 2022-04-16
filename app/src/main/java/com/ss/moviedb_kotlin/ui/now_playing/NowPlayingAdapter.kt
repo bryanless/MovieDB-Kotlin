@@ -20,7 +20,13 @@ import com.ss.moviedb_kotlin.util.Const
 class NowPlayingAdapter :
     PagingDataAdapter<NowPlayingMovie, NowPlayingViewHolder>(DifferCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NowPlayingViewHolder {
-        return NowPlayingViewHolder(ItemMoviePosterBinding.inflate(LayoutInflater.from(parent.context)))
+        return NowPlayingViewHolder(
+            ItemMoviePosterBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: NowPlayingViewHolder, position: Int) {

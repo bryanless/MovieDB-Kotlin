@@ -4,7 +4,6 @@ import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -15,13 +14,18 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.ss.moviedb_kotlin.databinding.ItemMoviePosterBinding
 import com.ss.moviedb_kotlin.model.movies.PopularMovie
-import com.ss.moviedb_kotlin.ui.home.HomeFragment
-import com.ss.moviedb_kotlin.util.Const
 import com.ss.moviedb_kotlin.ui.popular.PopularAdapter.PopularViewHolder
+import com.ss.moviedb_kotlin.util.Const
 
 class PopularAdapter : PagingDataAdapter<PopularMovie, PopularViewHolder>(DifferCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {
-        return PopularViewHolder(ItemMoviePosterBinding.inflate(LayoutInflater.from(parent.context)))
+        return PopularViewHolder(
+            ItemMoviePosterBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: PopularViewHolder, position: Int) {
