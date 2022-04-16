@@ -1,10 +1,9 @@
-package com.ss.moviedb_kotlin.data.paging
+package com.ss.moviedb_kotlin.data.paging.paging_source
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.ss.moviedb_kotlin.model.movies.NowPlayingMovie
 import com.ss.moviedb_kotlin.network.MovieDbApi
-import com.ss.moviedb_kotlin.network.MovieDbApiEndPoint
 import com.ss.moviedb_kotlin.util.Const
 import retrofit2.HttpException
 import java.io.IOException

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -20,15 +21,13 @@ import kotlinx.coroutines.launch
 class NowPlayingFragment : Fragment() {
     private var _binding: NowPlayingFragmentBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: NowPlayingViewModel by lazy {
-        ViewModelProvider(
-            requireActivity(), NowPlayingViewModelFactory(
-                NowPlayingRepository(
-                    MovieDbApi,
-                    MovieDatabase.getInstance(requireContext())
-                )
+    private val viewModel: NowPlayingViewModel by activityViewModels {
+        NowPlayingViewModelFactory(
+            NowPlayingRepository(
+                MovieDbApi,
+                MovieDatabase.getInstance(requireContext())
             )
-        ).get(NowPlayingViewModel::class.java)
+        )
     }
 
     override fun onCreateView(
@@ -36,7 +35,6 @@ class NowPlayingFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = NowPlayingFragmentBinding.inflate(inflater, container, false)
-
         return binding.root
     }
 

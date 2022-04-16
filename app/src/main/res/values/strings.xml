@@ -4,4 +4,8 @@
     <string name="title_now_playing">Now Playing</string>
     <string name="title_home">Home</string>
     <string name="title_upcoming">Upcoming</string>
+    <string name="title_placeholder">Placeholder</string>
+    <string name="title_trending">Trending Movies</string>
+    <string name="title_popular">Popular Movies</string>
+    <string name="title_top_rated">Top Rated Movies</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.ss.moviedb_kotlin.ui.upcoming
+package com.ss.moviedb_kotlin.ui.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,23 +7,26 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.recyclerview.widget.GridLayoutManager
-import com.ss.moviedb_kotlin.data.repository.UpcomingRepository
-import com.ss.moviedb_kotlin.databinding.UpcomingFragmentBinding
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.ss.moviedb_kotlin.data.repository.PopularRepository
+import com.ss.moviedb_kotlin.databinding.HomeFragmentBinding
 import com.ss.moviedb_kotlin.db.remote.MovieDatabase
 import com.ss.moviedb_kotlin.network.MovieDbApi
+import com.ss.moviedb_kotlin.ui.popular.PopularAdapter
+import com.ss.moviedb_kotlin.ui.popular.PopularViewModel
+import com.ss.moviedb_kotlin.ui.popular.PopularViewModelFactory
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class UpcomingFragment : Fragment() {
-    private var _binding: UpcomingFragmentBinding? = null;
+class HomeFragment : Fragment() {
+    private var _binding: HomeFragmentBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: UpcomingViewModel by activityViewModels {
-        UpcomingViewModelFactory(
-            UpcomingRepository(
+    private val popularViewModel: PopularViewModel by activityViewModels {
+        PopularViewModelFactory(
+            PopularRepository(
                 MovieDbApi,
                 MovieDatabase.getInstance(requireContext())
             )
@@ -34,7 +37,7 @@ class UpcomingFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = UpcomingFragmentBinding.inflate(inflater, container, false)
+        _binding = HomeFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -46,18 +49,18 @@ class UpcomingFragment : Fragment() {
     }
 
     private fun initView() {
-        val pagingAdapter = UpcomingAdapter()
+        val popularPagingAdapter = PopularAdapter()
         // * Recycler view
-        binding.recyclerViewUpcoming.apply {
-            layoutManager = GridLayoutManager(requireContext(), 3)
-            adapter = pagingAdapter
+        binding.recyclerViewPopular.apply {
+            layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
+            adapter = popularPagingAdapter
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.pagingDataFlow
+                popularViewModel.pagingDataFlow
                     .collectLatest { pagingData ->
-                        pagingAdapter.submitData(pagingData)
+                        popularPagingAdapter.submitData(pagingData)
                     }
             }
         }

@@ -25,6 +25,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
 
         init()
+        setListener()
+    }
+
+    private fun setListener() {
+        // * Expand app bar on fragment change
+        // https://developer.android.com/guide/navigation/navigation-ui#kotlin
+        navController.addOnDestinationChangedListener { _, _, _ ->
+            binding.appbar.setExpanded(true, true)
+        }
     }
 
     private fun init() {

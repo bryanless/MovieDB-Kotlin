@@ -6,10 +6,10 @@ import com.ss.moviedb_kotlin.data.repository.UpcomingRepository
 
 class UpcomingViewModelFactory(private val repository: UpcomingRepository) :
     ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(UpcomingViewModel::class.java)) {
-                return UpcomingViewModel(repository) as T
-            }
-            throw IllegalArgumentException("Unknown ViewModel class")
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(UpcomingViewModel::class.java)) {
+            return UpcomingViewModel(repository) as T
         }
+        throw IllegalArgumentException("Unknown ViewModel class")
+    }
 }
