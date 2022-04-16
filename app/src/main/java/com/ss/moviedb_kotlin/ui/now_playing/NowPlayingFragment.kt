@@ -42,7 +42,6 @@ class NowPlayingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initView()
-        setViewModel()
     }
 
     private fun initView() {
@@ -61,10 +60,6 @@ class NowPlayingFragment : Fragment() {
                     }
             }
         }
-    }
-
-    private fun setViewModel() {
-        // TODO Navigate to detail fragment
     }
 
     override fun onDestroyView() {

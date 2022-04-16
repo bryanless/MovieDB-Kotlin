@@ -51,7 +51,7 @@ class DetailFragment : Fragment() {
         movieId = arguments?.getInt("movieId")!!
 
         viewModel.getDetailMovie(movieId)
-        viewModel.movie.observe(viewLifecycleOwner, Observer { movie ->
+        viewModel.movie.observe(viewLifecycleOwner) { movie ->
             val year = movie.releaseDate?.substring(0, 4)
             val runtime = movie.runtime
             val voteAverage = movie.voteAverage.toString()
@@ -114,7 +114,7 @@ class DetailFragment : Fragment() {
                     FlexboxLayoutManager(requireContext(), FlexDirection.ROW, FlexWrap.WRAP)
                 adapter = detailGenreAdapter
             }
-        })
+        }
     }
 
     override fun onDestroy() {

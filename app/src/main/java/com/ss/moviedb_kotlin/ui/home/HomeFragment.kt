@@ -1,6 +1,8 @@
 package com.ss.moviedb_kotlin.ui.home
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +13,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
+import androidx.viewpager2.widget.ViewPager2.SCROLL_STATE_DRAGGING
+import androidx.viewpager2.widget.ViewPager2.SCROLL_STATE_IDLE
 import com.ss.moviedb_kotlin.data.repository.PopularRepository
 import com.ss.moviedb_kotlin.data.repository.TopRatedRepository
 import com.ss.moviedb_kotlin.data.repository.TrendingRepository
@@ -57,6 +62,11 @@ class HomeFragment : Fragment() {
         )
     }
 
+    private lateinit var handler: Handler
+    private lateinit var runnable: Runnable
+
+    private val delay: Long = 3 * 1000
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -69,7 +79,47 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initView()
-        setViewModel()
+        setViewPager()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        handler.removeCallbacks(runnable)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        handler.postDelayed(runnable, delay)
+    }
+
+    private fun setViewPager() {
+        handler = Handler(Looper.getMainLooper())
+        runnable = Runnable {
+            if (binding.viewPagerTrending.currentItem == binding.viewPagerTrending.adapter?.itemCount?.minus(1)) {
+                    binding.viewPagerTrending.currentItem = 0
+            } else {
+                binding.viewPagerTrending.currentItem = binding.viewPagerTrending.currentItem + 1
+            }
+        }
+
+        binding.viewPagerTrending.registerOnPageChangeCallback(object :
+            ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                handler.removeCallbacks(runnable)
+                handler.postDelayed(runnable, delay)
+            }
+
+            override fun onPageScrollStateChanged(state: Int) {
+                super.onPageScrollStateChanged(state)
+
+                if (state == SCROLL_STATE_DRAGGING) {
+                    handler.removeCallbacks(runnable)
+                } else if (state == SCROLL_STATE_IDLE) {
+                    handler.postDelayed(runnable, delay)
+                }
+            }
+        })
     }
 
     private fun initView() {
@@ -114,10 +164,6 @@ class HomeFragment : Fragment() {
                     }
             }
         }
-    }
-
-    private fun setViewModel() {
-        // TODO Navigate to detail fragment
     }
 
     override fun onDestroy() {
