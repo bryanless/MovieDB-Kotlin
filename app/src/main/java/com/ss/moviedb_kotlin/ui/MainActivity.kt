@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.navigation.NavController
+import androidx.navigation.NavGraph
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import androidx.navigation.ui.onNavDestinationSelected
@@ -61,14 +63,24 @@ class MainActivity : AppCompatActivity() {
 
         // * Bottom navigation
         setupWithNavController(binding.bottomNavigationView, navController)
+
+        binding.bottomNavigationView.apply {
+            // * Always set selected menu item as active
+            setOnItemSelectedListener { item ->
+                NavigationUI.onNavDestinationSelected(item, navController)
+
+                return@setOnItemSelectedListener true
+            }
+
+            // * Pop all back stack above active menu item
+            setOnItemReselectedListener { item ->
+                navController.popBackStack(item.itemId, inclusive = false)
+            }
+        }
         //==End of navigation based on documentation
     }
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
     }
 }
