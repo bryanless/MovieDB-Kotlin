@@ -7,4 +7,24 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!--  Movie  -->
+    <color name="primary">#181920</color>
+    <color name="primaryVariant">#0E1014</color>
+    <color name="onPrimary">#fdffff</color>
+    <color name="secondary">#546ee5</color>
+    <color name="secondaryVariant">#3C51B0</color>
+    <color name="onSecondary">#e4e7f6</color>
+    <color name="background">#181920</color>
+    <color name="onBackground">#fdffff</color>
+    <color name="surface">#252a34</color>
+    <color name="onSurface">#fdffff</color>
+
+    <!--  Text  -->
+    <color name="bottomNavigationActive">@color/secondary</color>
+    <color name="bottomNavigationInactive">#3e4265</color>
+    <color name="mediumEmphasis">#EAEAEA</color>
+
+    <!--  Progress Bar  -->
+    <color name="circularProgressBar">@color/white</color>
 </resources>

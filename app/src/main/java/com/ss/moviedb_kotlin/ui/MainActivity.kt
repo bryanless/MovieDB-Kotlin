@@ -1,16 +1,13 @@
 package com.ss.moviedb_kotlin.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
-import androidx.navigation.NavGraph
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import androidx.navigation.ui.NavigationUI.setupWithNavController
-import androidx.navigation.ui.onNavDestinationSelected
 import com.ss.moviedb_kotlin.R
 import com.ss.moviedb_kotlin.databinding.MainActivityBinding
 
