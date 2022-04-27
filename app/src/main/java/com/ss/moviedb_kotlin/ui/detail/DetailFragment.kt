@@ -60,7 +60,8 @@ class DetailFragment : Fragment() {
             // ? YouTube
             if (TextUtils.equals(videoSite, Const.YOUTUBE)) {
                 // * Set intent to launch YouTube
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(Const.YOUTUBE_WATCH_URL + videoKey))
+                val intent =
+                    Intent(Intent.ACTION_VIEW, Uri.parse(Const.YOUTUBE_WATCH_URL + videoKey))
 
                 // * Check if YouTube installed
                 val manager = requireActivity().packageManager
@@ -118,7 +119,11 @@ class DetailFragment : Fragment() {
             binding.textMoviePopularityDetail.text = popularity
             binding.textMovieProductionCompaniesDetail.text = productionCompanies
             binding.textMovieDescriptionDetail.text =
-                getString(R.string.text_movie_description, tagline, overview)
+                if (tagline.isNullOrEmpty()) overview else getString(
+                    R.string.text_movie_description,
+                    tagline,
+                    overview
+                )
             if (!movie.backdropPath.isNullOrBlank()) {
                 Glide.with(this)
                     .load(Const.IMG_URL_780 + movie.backdropPath)

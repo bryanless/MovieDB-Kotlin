@@ -27,6 +27,7 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="16dp"
                 android:text="@string/title_trending"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -62,6 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:text="@string/title_popular"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                 app:layout_constraintEnd_toEndOf="@+id/text_trending_title"
                 app:layout_constraintStart_toStartOf="@+id/text_trending_title"
                 app:layout_constraintTop_toBottomOf="@+id/card_trending" />
@@ -88,6 +90,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:text="@string/title_top_rated"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                 app:layout_constraintEnd_toEndOf="@+id/text_popular_title"
                 app:layout_constraintStart_toStartOf="@+id/text_popular_title"
                 app:layout_constraintTop_toBottomOf="@+id/recycler_view_popular" />

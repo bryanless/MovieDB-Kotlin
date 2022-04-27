@@ -62,11 +62,12 @@
                         android:layout_marginBottom="8dp"
                         android:ellipsize="end"
                         android:gravity="center"
-                        android:text="@string/text_movie_title"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                         app:layout_constraintBottom_toBottomOf="@+id/image_movie_poster_detail"
                         app:layout_constraintEnd_toEndOf="@+id/image_movie_poster_detail"
                         app:layout_constraintStart_toStartOf="@+id/image_movie_poster_detail"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="@string/text_movie_title" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -75,10 +76,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="TextView"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
                 app:layout_constraintEnd_toEndOf="@+id/card_movie_poster_detail"
                 app:layout_constraintStart_toStartOf="@+id/card_movie_poster_detail"
-                app:layout_constraintTop_toBottomOf="@+id/card_movie_poster_detail" />
+                app:layout_constraintTop_toBottomOf="@+id/card_movie_poster_detail"
+                tools:text="@string/text_null" />
 
             <Button
                 android:id="@+id/button_movie_watch_trailer_detail"
@@ -97,10 +99,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="@string/text_movie_title"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                 app:layout_constraintEnd_toEndOf="@+id/button_movie_watch_trailer_detail"
                 app:layout_constraintStart_toStartOf="@+id/button_movie_watch_trailer_detail"
-                app:layout_constraintTop_toBottomOf="@+id/button_movie_watch_trailer_detail" />
+                app:layout_constraintTop_toBottomOf="@+id/button_movie_watch_trailer_detail"
+                tools:text="@string/text_movie_title" />
 
             <ImageView
                 android:id="@+id/imageView3"
@@ -116,10 +119,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:text="@string/text_null"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView3"
                 app:layout_constraintStart_toEndOf="@+id/imageView3"
-                app:layout_constraintTop_toTopOf="@+id/imageView3" />
+                app:layout_constraintTop_toTopOf="@+id/imageView3"
+                tools:text="@string/text_null" />
 
             <View
                 android:id="@+id/divider"
@@ -146,10 +150,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:text="@string/text_null"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView4"
                 app:layout_constraintStart_toEndOf="@+id/imageView4"
-                app:layout_constraintTop_toTopOf="@+id/imageView4" />
+                app:layout_constraintTop_toTopOf="@+id/imageView4"
+                tools:text="@string/text_null" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_movie_genre_detail"
@@ -171,6 +176,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/text_production_company"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                 app:layout_constraintEnd_toEndOf="@+id/text_movie_title_detail"
                 app:layout_constraintStart_toStartOf="@+id/text_movie_title_detail"
                 app:layout_constraintTop_toBottomOf="@id/recycler_view_movie_genre_detail" />
@@ -180,10 +186,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@string/text_null"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                 app:layout_constraintEnd_toEndOf="@+id/textView6"
                 app:layout_constraintStart_toStartOf="@+id/textView6"
-                app:layout_constraintTop_toBottomOf="@+id/textView6" />
+                app:layout_constraintTop_toBottomOf="@+id/textView6"
+                tools:text="@string/text_null" />
 
             <TextView
                 android:id="@+id/textView7"
@@ -191,6 +198,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:text="@string/text_synopsis"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                 app:layout_constraintEnd_toEndOf="@id/textView6"
                 app:layout_constraintStart_toStartOf="@id/textView6"
                 app:layout_constraintTop_toBottomOf="@+id/text_movie_production_companies_detail" />
@@ -201,11 +209,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="24dp"
-                android:text="@string/text_null"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/textView7"
                 app:layout_constraintStart_toStartOf="@id/textView7"
-                app:layout_constraintTop_toBottomOf="@+id/textView7" />
+                app:layout_constraintTop_toBottomOf="@+id/textView7"
+                tools:text="@string/text_null" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 

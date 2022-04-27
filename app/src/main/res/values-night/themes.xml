@@ -10,7 +10,75 @@
         <item name="colorSecondaryVariant">@color/teal_200</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/primaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="android:textColor">@color/onBackground</item>
+        <item name="android:colorBackground">@color/background</item>
+
+        <item name="toolbarStyle">@style/Widget.App.Toolbar</item>
+        <item name="bottomNavigationStyle">@style/Widget.App.BottomNavigationView</item>
+        <item name="materialCardViewStyle">@style/Widget.App.CardView</item>
+        <!--        <item name="borderlessButtonStyle">@style/Widget.App.Button.TextButton</item>-->
+        <!--        <item name="materialButtonOutlinedStyle">@style/Widget.App.Button.OutlinedButton</item>-->
+        <item name="materialButtonStyle">@style/Widget.App.Button</item>
+    </style>
+
+    <!--  Toolbar  -->
+    <style name="Widget.App.Toolbar" parent="Widget.MaterialComponents.Toolbar.Primary">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Toolbar</item>
+    </style>
+
+    <style name="ThemeOverlay.App.Toolbar" parent="">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primaryVariant</item>
+        <item name="colorOnPrimary">@color/onPrimary</item>
+        <item name="colorControlNormal">@color/onSurface</item>
+    </style>
+
+    <!--  Bottom Navigation View  -->
+    <style name="Widget.App.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.BottomNavigationView</item>
+    </style>
+
+    <style name="ThemeOverlay.App.BottomNavigationView" parent="">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorOnPrimary">@color/secondary</item>
+    </style>
+
+    <!--  Card View  -->
+    <style name="Widget.App.CardView" parent="Widget.MaterialComponents.CardView">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Card</item>
+    </style>
+
+    <style name="ThemeOverlay.App.Card" parent="">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorOnSurface">@color/onSurface</item>
+    </style>
+
+    <!--  Buttons  -->
+    <!--    <style name="Widget.App.Button.TextButton" parent="Widget.MaterialComponents.Button.TextButton">-->
+    <!--        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Button.TextButton</item>-->
+    <!--        <item name="android:textAppearance">@style/TextAppearance.App.Button</item>-->
+    <!--        <item name="shapeAppearance">@style/ShapeAppearance.App.SmallComponent</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.App.Button.OutlinedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">-->
+    <!--        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Button.TextButton</item>-->
+    <!--        <item name="android:textAppearance">@style/TextAppearance.App.Button</item>-->
+    <!--        <item name="shapeAppearance">@style/ShapeAppearance.App.SmallComponent</item>-->
+    <!--    </style>-->
+
+    <style name="Widget.App.Button" parent="Widget.MaterialComponents.Button">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Button</item>
+    </style>
+
+    <!--    <style name="ThemeOverlay.App.Button.TextButton" parent="">-->
+    <!--        <item name="colorPrimary">@color/shrine_pink_900</item>-->
+    <!--    </style>-->
+
+    <style name="ThemeOverlay.App.Button" parent="">
+        <item name="colorPrimary">@color/secondary</item>
+        <item name="colorOnPrimary">@color/onSecondary</item>
     </style>
 </resources>
