@@ -15,7 +15,7 @@ class TrendingViewModel(private val trendingRepository: TrendingRepository) : Vi
         pagingDataFlow = getTrendingMovies().cachedIn(viewModelScope)
     }
 
-    // * Get now playing movies
+    // * Get trending movies
     private fun getTrendingMovies(): Flow<PagingData<TrendingMovie>> =
         trendingRepository.getTrendingMoviesStream()
 }

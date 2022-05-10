@@ -6,12 +6,15 @@ import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
@@ -24,15 +27,23 @@ import com.google.android.material.snackbar.Snackbar
 import com.ss.moviedb_kotlin.R
 import com.ss.moviedb_kotlin.data.repository.DetailRepository
 import com.ss.moviedb_kotlin.databinding.DetailFragmentBinding
+import com.ss.moviedb_kotlin.db.remote.MovieDatabase
 import com.ss.moviedb_kotlin.network.MovieDbApi
 import com.ss.moviedb_kotlin.util.Const
+import com.ss.moviedb_kotlin.util.NpaLinearLayoutManager
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class DetailFragment : Fragment() {
     private var _binding: DetailFragmentBinding? = null
     private val binding get() = _binding!!
     private val viewModel: DetailViewModel by viewModels {
         DetailViewModelFactory(
-            DetailRepository(MovieDbApi)
+            DetailRepository(
+                MovieDbApi,
+                MovieDatabase.getInstance(requireContext()),
+                movieId
+            )
         )
     }
 
@@ -166,6 +177,7 @@ class DetailFragment : Fragment() {
             }
         }
 
+        // * Movie trailer
         viewModel.getVideosMovie(movieId)
         viewModel.videos.observe(viewLifecycleOwner) { videos ->
             if (videos.isNotEmpty()) {
@@ -185,6 +197,22 @@ class DetailFragment : Fragment() {
                         videoSite = videos.first().site.toString()
                         videoKey = videos.first().key.toString()
                     }
+                }
+            }
+        }
+
+        // * Recommendation recycler view
+        val recommendationPagingAdapter = RecommendationAdapter()
+        binding.recyclerViewMovieRecommendationDetail.apply {
+            layoutManager = NpaLinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
+            adapter = recommendationPagingAdapter
+            (layoutManager as NpaLinearLayoutManager).scrollToPositionWithOffset(0, 0)
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.pagingDataFlow.collectLatest { pagingData ->
+                    recommendationPagingAdapter.submitData(pagingData)
                 }
             }
         }

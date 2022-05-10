@@ -40,5 +40,8 @@
         <argument
             android:name="movieId"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_detail_fragment_self"
+            app:destination="@id/detail_fragment" />
     </fragment>
 </navigation>

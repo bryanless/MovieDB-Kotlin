@@ -15,7 +15,7 @@ class TopRatedViewModel(private val topRatedRepository: TopRatedRepository) : Vi
         pagingDataFlow = getTopRatedMovies().cachedIn(viewModelScope)
     }
 
-    // * Get now playing movies
+    // * Get top rated movies
     private fun getTopRatedMovies(): Flow<PagingData<TopRatedMovie>> =
         topRatedRepository.getTopRatedMoviesStream()
 }

@@ -8,7 +8,6 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface MovieDbApiEndPoint {
-    //==Start of movie API
     @GET("movie/{movie_id}")
     suspend fun getMovieById(
         @Path("movie_id") movieId: Int,
@@ -44,10 +43,7 @@ interface MovieDbApiEndPoint {
         @Path("movie_id") movieId: Int,
         @Query("api_key") apiKey: String
     ): VideoResponse
-    //==End of movie API
 
-    //==End of genre API
-    //==Start of trending API
     @GET("trending/{media_type}/{time_window}")
     suspend fun getTrending(
         @Path("media_type") mediaType: String,
@@ -55,5 +51,11 @@ interface MovieDbApiEndPoint {
         @Query("page") page: Int,
         @Query("api_key") apiKey: String
     ): TrendingResponse
-    //==End of trending API
+
+    @GET("movie/{movie_id}/recommendations")
+    suspend fun getRecommendation(
+        @Path("movie_id") movieId: Int,
+        @Query("page") page: Int,
+        @Query("api_key") apiKey: String
+    ): RecommendationResponse
 }

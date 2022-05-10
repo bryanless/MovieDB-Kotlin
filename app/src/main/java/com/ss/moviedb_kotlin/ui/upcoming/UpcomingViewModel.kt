@@ -15,7 +15,7 @@ class UpcomingViewModel(private val upcomingRepository: UpcomingRepository) : Vi
         pagingDataFlow = getUpcomingMovies().cachedIn(viewModelScope)
     }
 
-    // * Get now playing movies
+    // * Get upcoming movies
     private fun getUpcomingMovies(): Flow<PagingData<UpcomingMovie>> =
         upcomingRepository.getUpcomingMoviesStream()
 }

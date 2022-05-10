@@ -14,8 +14,9 @@ import com.ss.moviedb_kotlin.util.Const
         PopularMovie::class, PopularRemoteKeys::class,
         TopRatedMovie::class, TopRatedRemoteKeys::class,
         NowPlayingMovie::class, NowPlayingRemoteKeys::class,
-        UpcomingMovie::class, UpcomingRemoteKeys::class],
-    version = 5,
+        UpcomingMovie::class, UpcomingRemoteKeys::class,
+        RecommendationMovie::class, RecommendationRemoteKeys::class],
+    version = 6,
     exportSchema = false
 )
 abstract class MovieDatabase : RoomDatabase() {
@@ -26,6 +27,7 @@ abstract class MovieDatabase : RoomDatabase() {
     abstract fun topRatedRemoteKeysDao(): TopRatedRemoteKeysDao
     abstract fun nowPlayingRemoteKeysDao(): NowPlayingRemoteKeysDao
     abstract fun upcomingRemoteKeysDao(): UpcomingRemoteKeysDao
+    abstract fun recommendationRemoteKeysDao(): RecommendationRemoteKeysDao
 
     // * Singleton instance
     companion object {

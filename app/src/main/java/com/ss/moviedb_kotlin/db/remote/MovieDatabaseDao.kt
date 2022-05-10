@@ -63,4 +63,16 @@ interface MovieDatabaseDao {
     @Query("DELETE FROM upcoming_movies")
     suspend fun clearUpcomingMovies()
     //==End of Upcoming
+
+    //==Start of Recommendation
+    @Insert(onConflict = REPLACE)
+    suspend fun insertRecommendationMovies(recommendationMovieList: List<RecommendationMovie>)
+
+    @Query("SELECT * FROM recommendation_movies ORDER BY remoteId ASC")
+    fun getRecommendationMovies(): PagingSource<Int, RecommendationMovie>
+
+    @Query("DELETE FROM recommendation_movies")
+    suspend fun clearRecommendationMovies()
+    //==End of Recommendation
+
 }

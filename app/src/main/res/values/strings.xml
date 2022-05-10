@@ -19,4 +19,5 @@
     <string name="title_movie_detail">Movie Detail</string>
     <string name="text_video_failed">Trailer is not available</string>
     <string name="text_dismiss">Dismiss</string>
+    <string name="title_recommendation">Recommended Movies</string>
 </resources>

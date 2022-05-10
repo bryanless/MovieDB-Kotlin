@@ -20,17 +20,26 @@ class Const {
 
         // * Room Database
         const val MOVIEDB_DATABASE = "moviedb"
+
         const val MEDIA_TYPE_MOVIE = "movie"
         const val TIME_WINDOW_WEEK = "week"
+
         const val TRENDING_MOVIES_TABLE = "trending_movies"
         const val TRENDING_REMOTE_KEYS_TABLE = "trending_remote_keys"
+
         const val POPULAR_MOVIES_TABLE = "popular_movies"
         const val POPULAR_REMOTE_KEYS_TABLE = "popular_remote_keys"
+
         const val TOP_RATED_MOVIES_TABLE = "top_rated_movies"
         const val TOP_RATED_REMOTE_KEYS_TABLE = "top_rated_remote_keys"
+
         const val NOW_PLAYING_MOVIES_TABLE = "now_playing_movies"
         const val NOW_PLAYING_REMOTE_KEYS_TABLE = "now_playing_remote_keys"
+
         const val UPCOMING_MOVIES_TABLE = "upcoming_movies"
         const val UPCOMING_REMOTE_KEYS_TABLE = "upcoming_remote_keys"
+
+        const val RECOMMENDATION_MOVIES_TABLE = "recommendation_movies"
+        const val RECOMMENDATION_REMOTE_KEYS_TABLE = "recommendation_remote_keys"
     }
 }

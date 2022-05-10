@@ -15,7 +15,7 @@ class PopularViewModel(private val popularRepository: PopularRepository) : ViewM
         pagingDataFlow = getPopularMovies().cachedIn(viewModelScope)
     }
 
-    // * Get now playing movies
+    // * Get popular movies
     private fun getPopularMovies(): Flow<PagingData<PopularMovie>> =
         popularRepository.getPopularMoviesStream()
 }
